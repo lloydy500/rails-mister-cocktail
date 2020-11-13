@@ -1,0 +1,8 @@
+<h2><%= @dose.name %></h2>
+<ul class="list-group">
+<% @dose.doses.each do |dose| %>
+  <li> <%= dose.description %> </li>
+  <li> <%= dose.ingredient.name %> </li>
+<% end %>
+</ul>
+<%= link_to 'Back', doses_path %>
