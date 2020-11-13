@@ -1,19 +1,12 @@
 class DosesController < ApplicationController
-
-  def index
-    @doses = dose.all
-  end
-
-  def show
-    @dose = dose.find(params[:id])
-  end
+  before_action :set_cocktail, except: %i[destroy]
 
   def new
-    @dose = dose.new
+    @dose = Dose.new
   end
 
   def create
-    @dose = dose.new(dose_params)
+    @dose = Dose.new(dose_params)
     
     if @dose.save
       redirect_to dose_path(@dose)
@@ -21,23 +14,19 @@ class DosesController < ApplicationController
       render :new
     end
   end
-  
-  def edit
-    @dose = dose.find(params[:id])
-  end
 
-  def update
-    @dose = dose.find(params[:id])
-    @dose.update(dose_params)
-  end
 
- def destroy
-    @dose = dose.find(params[:id])
+  def destroy
+    @dose = Dose.find(params[:id])
     @dose.destroy
-
     # no need for app/views/doses/destroy.html.erb
     redirect_to doses_path
   end
+
+  def set_cocktail
+    @cocktail = Cocktail.find(params[:cocktail_id])
+  end
+  
   
   private
 

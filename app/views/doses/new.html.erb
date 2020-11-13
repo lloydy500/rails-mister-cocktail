@@ -1,8 +1,8 @@
-<h2><%= @dose.name %></h2>
-<ul class="list-group">
-<% @dose.doses.each do |dose| %>
-  <li> <%= dose.description %> </li>
-  <li> <%= dose.ingredient.name %> </li>
+<h2>What's in it</h2>
+<%= simple_form_for [@cocktail, @dose] do |d| %>
+  <%= d.association :ingredient %>
+  <%= d.input :description %>
+  <%= d.submit "Confirm", class: "btn btn-primary" %>
 <% end %>
-</ul>
-<%= link_to 'Back', doses_path %>
+<%= link_to 'Back', cocktail_path(@cocktail) %>
+
